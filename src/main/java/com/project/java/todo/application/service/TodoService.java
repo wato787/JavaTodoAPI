@@ -26,10 +26,17 @@ public class TodoService {
         return ResponseEntity.ok(todoRepository.save(todo));
     }
 
-    public ResponseEntity<Todo> updateTodo(Long id, Todo todo) {
-        todo.setId(id);
-        return ResponseEntity.ok(todoRepository.save(todo));
+    public ResponseEntity<Todo> updateTodo(Long id, Todo updatedTodo) {
+        Todo todo = todoRepository.findById(id)
+                .map(t -> Todo.builder()
+                        .id(id)
+                        .title(updatedTodo.getTitle())
+                        .description(updatedTodo.getDescription())
+                        .completed(updatedTodo.isCompleted())
+                        .build())
+                .orElseThrow(() -> new RuntimeException("Todo not found with id " + id));
 
+        return ResponseEntity.ok(todoRepository.save(todo));
     }
 
     public void deleteTodo(Long id) {
