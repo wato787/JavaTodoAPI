@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @NoArgsConstructor
@@ -16,7 +15,6 @@ public class Todo {
     private Long id ;
 
     private String title;
-    private String description;
 
     @Column(nullable = false)
     private  boolean completed = false; // デフォルト値はfalse
@@ -26,7 +24,6 @@ public class Todo {
     public Todo(Long id, String title, String description, boolean completed) {
         this.id = id;
         this.title = title;
-        this.description = description;
         this.completed = completed;
     }
 

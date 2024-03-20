@@ -22,7 +22,10 @@ public class TodoService {
         return todoRepository.findById(id);
     }
 
-    public ResponseEntity<Todo> createTodo(Todo todo) {
+    public ResponseEntity<Todo> createTodo(String title) {
+        Todo todo = Todo.builder()
+                .title(title)
+                .build();
         return ResponseEntity.ok(todoRepository.save(todo));
     }
 
@@ -31,7 +34,6 @@ public class TodoService {
                 .map(t -> Todo.builder()
                         .id(id)
                         .title(updatedTodo.getTitle())
-                        .description(updatedTodo.getDescription())
                         .completed(updatedTodo.isCompleted())
                         .build())
                 .orElseThrow(() -> new RuntimeException("Todo not found with id " + id));

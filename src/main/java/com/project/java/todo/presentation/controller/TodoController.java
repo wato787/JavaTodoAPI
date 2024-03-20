@@ -11,10 +11,11 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:3000")
 public class TodoController {
 
     @Autowired
-    private  TodoService todoService;
+    private TodoService todoService;
 
     @GetMapping("/todos")
     public List<Todo> getTodos() {
@@ -30,9 +31,9 @@ public class TodoController {
 
     @PostMapping("/todo")
     public ResponseEntity<Todo> createTodo(
-            @RequestBody Todo todo
+            @RequestBody String title
     ) {
-        return todoService.createTodo(todo);
+        return todoService.createTodo(title);
     }
 
     @PutMapping("/todo/{id}")
@@ -48,6 +49,7 @@ public class TodoController {
             @PathVariable("id") Long id
     ) {
         todoService.deleteTodo(id);
+
     }
 
 
