@@ -21,7 +21,7 @@ public class Todo {
 
 
     @Builder
-    public Todo(Long id, String title, String description, boolean completed) {
+    public Todo(Long id, String title, boolean completed) {
         this.id = id;
         this.title = title;
         this.completed = completed;
